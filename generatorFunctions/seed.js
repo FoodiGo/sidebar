@@ -39,7 +39,7 @@ const addData = (restaurants, callback) => {
 	callback(seededRestaurants);
 }
 
-const searchCoordinates = (restaurants, addresses, fn) =>{
+const searchCoordinates = (restaurants, addresses, fn) => {
 	restaurants.forEach((item, incrementAddress) => {
 		search(addresses[incrementAddress], (latLong)=> {
 			item['location'] = item['location'];
@@ -56,7 +56,7 @@ const searchCoordinates = (restaurants, addresses, fn) =>{
 
 const save = (seededRestaurants) => {
 	console.log(seededRestaurants);
-	Information.create(seededRestaurants)
+	Information.create(seededRestaurants, end);
 }
 
 searchCoordinates(restaurants, addresses, addData);
