@@ -26,14 +26,10 @@ const getData = (callback) => {
 
 const end = () => {
   mongoose.disconnect();
+  
 }
 
-getData((err, data) => {
-  if(err){
-    throw err;
-  }
-  console.log(data)
-})
+
 
 
 
