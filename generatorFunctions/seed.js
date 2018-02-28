@@ -5,7 +5,7 @@ const addresses = require('../data/addresses.js');
 //generators
 const {coordGen} = require('./coordinateFinder.js');
 
-const {Information} = require('./informationModel.js')
+const { Information, end } = require('./informationModel.js')
 let seededRestaurants = [];
 
 const randomIndex = (length) => {

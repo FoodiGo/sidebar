@@ -24,5 +24,19 @@ const getData = (callback) => {
   Information.find().sort({id: 1}).exec(callback);
 }
 
+const end = () => {
+  mongoose.disconnect();
+}
+
+getData((err, data) => {
+  if(err){
+    throw err;
+  }
+  console.log(data)
+})
+
+
+
 exports.Information = Information;
 exports.getData = getData;
+exports.end = end;
