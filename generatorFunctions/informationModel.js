@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/sidebar');
 
 const informationSchema = mongoose.Schema({
   id: {
     type: Number,
-    unqiue: true
+    unqiue: true,
   },  
   title: String,
   location: Object,
   minimumDelivery: Number,
   price: {
     type: String,
-    enum: ['$', '$$', '$$$', '$$$$']
+    enum: ['$', '$$', '$$$', '$$$$'],
   },
   text: String,
-  hours: Object
+  hours: Object,
 });
 
 const Information = mongoose.model('Information', informationSchema);

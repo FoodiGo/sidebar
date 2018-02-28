@@ -4,6 +4,7 @@
   "description": "Yelp Application",
   "main": "seed.js",
   "scripts": {
+    "mongod": "mongod",
     "test": "jest",
     "start": "node server.js",
     "build": "node seed.js"
@@ -13,7 +14,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.17.0",
+    "babel-jest": "^22.4.1",
     "body-parser": "^1.15.2",
+    "eslint": "^4.18.1",
     "express": "^4.14.0",
     "geocoder": "^0.2.3",
     "google-geolocation": "^1.0.2",
@@ -27,8 +30,12 @@
   },
   "devDependencies": {
     "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-env": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.2",
     "nodemon": "^1.11.0",
     "webpack": "^1.13.2"

@@ -4,6 +4,7 @@ const {descriptions, possibleHours, mins} = require('../data/randomData.js');
 const addresses = require('../data/addresses.js');
 //generators
 const {coordGen} = require('./coordinateFinder.js');
+
 const {Information} = require('./informationModel.js')
 let seededRestaurants = [];
 
@@ -61,6 +62,3 @@ const save = (seededRestaurants) => {
 searchCoordinates(restaurants, addresses, addData);
 exports.randomIndex = randomIndex;
 exports.addData = addData;
-//----INVOKATION---
-
-//addData(Information);
