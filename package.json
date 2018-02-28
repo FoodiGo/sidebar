@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "babel-loader": "^6.2.5",
-    "babel-preset-env": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.9.0",
