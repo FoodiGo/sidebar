@@ -9,6 +9,6 @@ app.use(bodyParser.json());
 app.use('/', router);
 app.use(express.static(path.join(__dirname, '/../client')));
 
-app.listen(3300);
+app.listen(3200);
 
 module.exports = app;

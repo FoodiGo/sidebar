@@ -37,6 +37,7 @@ const addData = (restaurantsArray, callback) => {
         text: item.text,
         hours: item.hours,
       });
+      console.log(newInfo)
       seededRestaurants.push(newInfo);
     });
     callback(seededRestaurants, end);
