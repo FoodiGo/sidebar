@@ -6,7 +6,7 @@
   "scripts": {
     "mongod": "mongod",
     "test": "jest",
-    "start": "node server.js",
+    "start": "node server/server.js",
     "build": "node seed.js"
   },
   "author": "",
@@ -16,7 +16,7 @@
     "babel-core": "^6.17.0",
     "babel-jest": "^22.4.1",
     "body-parser": "^1.15.2",
-    "eslint": "^4.18.1",
+    "eslint-plugin-jest": "^21.12.2",
     "express": "^4.14.0",
     "geocoder": "^0.2.3",
     "google-geolocation": "^1.0.2",
@@ -26,17 +26,20 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "request": "^2.75.0",
+    "superagent": "^3.8.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "babel-loader": "^6.2.5",
     "babel-preset-react": "^6.16.0",
+    "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.2",
     "nodemon": "^1.11.0",
+    "supertest": "^3.0.0",
     "webpack": "^1.13.2"
   }
 }

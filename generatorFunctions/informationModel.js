@@ -6,8 +6,11 @@ const informationSchema = mongoose.Schema({
   id: {
     type: Number,
     unqiue: true,
-  },  
-  title: String,
+  },
+  title: {
+    type: String,
+    unqiue: true,
+  },
   location: Object,
   minimumDelivery: Number,
   price: {
@@ -21,17 +24,16 @@ const informationSchema = mongoose.Schema({
 const Information = mongoose.model('Information', informationSchema);
 
 const getData = (callback) => {
-  Information.find().sort({id: 1}).exec(callback);
-}
+  Information.find().sort({ id: 1 }).exec(callback);
+};
 
-const end = () => {
-  mongoose.disconnect();
-  
-}
-
-
-
-
+const end = (sendConnectionState) => {
+  let connected;
+  mongoose.connection.close(() => {
+    connected = mongoose.connection.readyState;
+    sendConnectionState(connected);
+  });
+};
 
 exports.Information = Information;
 exports.getData = getData;
