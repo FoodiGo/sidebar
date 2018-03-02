@@ -7,7 +7,7 @@
     "mongod": "mongod",
     "test": "jest",
     "start": "node server/server.js",
-    "build": "node seed.js"
+    "build": "node generatorFunctions/seed.js"
   },
   "author": "",
   "license": "ISC",
