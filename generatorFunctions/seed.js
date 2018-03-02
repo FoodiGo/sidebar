@@ -73,6 +73,7 @@ const searchCoordinates = (restaurantsArray, addressesArray, fn) => {
 };
 
 searchCoordinates(restaurants, addresses, addData);
+
 exports.randomIndex = randomIndex;
 exports.addData = addData;
 exports.searchCoordinates = searchCoordinates;
