@@ -1,7 +1,8 @@
 const axios = require('axios');
+const key = require('../api.js');
 
 module.exports = (state, callback) => {
-  axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address= ${state} &key=AIzaSyDzg4llbXWFsnl5qhj5XjiKc8weqtjAZI8`)
+  axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address= ${state} &key=${key}`)
     .then((response) => {
       const latLong = response.data.results[0].geometry.location;
       callback(latLong);

@@ -3,8 +3,6 @@
 }
 
 .feeBar {
-  margin: 0;
-  font-size: 300px;
   display: block;
 }
 .list .hidden {
@@ -12,8 +10,6 @@
 }
 
 .list {
-  margin: 0;
-  font-size: 300px;
   display: block;
 }
 
