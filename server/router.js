@@ -8,7 +8,7 @@ router.get('/:id/information', (req, res) => {
     if (err) {
       throw err;
     }
-    res.send(restaurant);
+    res.send(200);
   });
 });
 

@@ -1,0 +1,43 @@
+.feeBar .hidden {
+  display: none;
+}
+
+.feeBar {
+  margin: 0;
+  font-size: 300px;
+  display: block;
+}
+.list .hidden {
+  display: none;
+}
+
+.list {
+  margin: 0;
+  font-size: 300px;
+  display: block;
+}
+
+
+.input .hidden {
+  display: none;
+}
+
+.input {
+  display: block;
+}
+
+.infoInput .hidden {
+  display: none;
+}
+
+.infoInput {
+  display: block;
+}
+
+.h5 .hidden {
+  display: none;
+}
+
+.h5 {
+  display: block;
+}

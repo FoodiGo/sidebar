@@ -1,11 +1,11 @@
 const { Information, getData, end } = require('./informationModel.js');
 
-test('database should hold 99 restaurant objects ', (done) => {
+test('database should hold 100 restaurant objects ', (done) => {
   function callback(err, data) {
     if (err) {
       throw err;
     }
-    expect(data.length).toBe(99);
+    expect(data.length).toBe(100);
     done();
   }
   getData(callback);
@@ -17,8 +17,8 @@ test('database should not overwrite restaurant objects when same restaurant/rest
       throw err;
     }
     expect(data[0]).toBeDefined();
-    expect(data[98]).toBeDefined();
-    expect(data.length).toBe(99);
+    expect(data[99]).toBeDefined();
+    expect(data.length).toBe(100);
     expect(data[1]).not.toBe(data[0]);
     end(isConnected => isConnected);
     done();

@@ -424,7 +424,7 @@ module.exports = [
     title: "Vallarta Express Mexican Eatery",
     foodType: "Mexican",
     rating: 5,
-    price: 2,
+    price: "$$$",
   },
   {
     id: 162,

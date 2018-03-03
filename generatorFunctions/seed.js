@@ -62,6 +62,9 @@ const searchCoordinates = (restaurantsArray, addressesArray, fn) => {
     const restaurant = item;
     let incrementAddress = increment;
     coordGen(addressesArray[incrementAddress], (latLong) => {
+      if (latLong === undefined) {
+        restaurant.location = { lng: -93.6739507, lat: 39.7701723 };
+      }
       restaurant.location = latLong;
       if (incrementAddress === restaurantsArray.length - 1) {
         fn(restaurantsArray, save);
@@ -78,3 +81,4 @@ exports.randomIndex = randomIndex;
 exports.addData = addData;
 exports.searchCoordinates = searchCoordinates;
 exports.save = save;
+exports.seededRestaurants = seededRestaurants;

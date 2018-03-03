@@ -1,4 +1,4 @@
-const { randomIndex, addData, searchCoordinates } = require('./generatorFunctions/seed.js');
+const { randomIndex, addData, seededRestaurants } = require('./generatorFunctions/seed.js');
 const restaurants = require('./data/seedData.js');
 
 test('randomIndex when passed a string should return undefined', () => {
@@ -19,7 +19,7 @@ test('addData should create the dataArray\'s length of restaurants ', (done) => 
     done();
   }
   let dataArrayLength;
-  addData(restaurants, (seededRestaurants) => {
+  addData(restaurants, () => {
     dataArrayLength = seededRestaurants.length;
     callback(dataArrayLength);
   });
@@ -35,14 +35,3 @@ test('addData should return undefined for any non array inputs ', (done) => {
   });
 });
 
-// test('searchCoordinates should add coordinates to an array of objects for an array of states ', (done) => {
-//   function callback(data) {
-//     expect(typeof data).toBe('object');
-//     expect(data[0].location.lat).toBeDefined();
-//     expect(data[1].location.lat).toBeDefined();
-//     done();
-//   }
-//   searchCoordinates([{}, {}, {}], ['Florida', 'Colorado', 'Florida'], (alteredObj) => {
-//     callback(alteredObj);
-//   });
-// });
