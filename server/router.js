@@ -3,7 +3,7 @@ const { Information } = require('../generatorFunctions/informationModel.js');
 
 const router = express.Router();
 
-router.get('/:id/information', (req, res) => {
+router.get('/information/:id', (req, res) => {
   const id = req.params.id;
   const idSplit = id.split(":");
   Information.findOne({ id: idSplit[1] }, (err, restaurant) => {

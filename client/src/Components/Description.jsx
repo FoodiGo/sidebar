@@ -6,7 +6,6 @@ class Description extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
     };
 
   }
@@ -21,7 +20,8 @@ class Description extends React.Component {
   render() {
     return (
       <div className='container'>
-        <h1>Description</h1>
+        <h1>From The Business</h1>
+        <p>{this.props.description}</p>
       </div>
     );
   }

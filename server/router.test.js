@@ -11,7 +11,7 @@ describe('Test the root path', () => {
 
 describe('Test the root path', () => {
   test('It should response the first data points title ', () => {
-    return request(app).get("/:101/information").then(response => {
+    return request(app).get("/information/:101").then(response => {
       expect(response.body.title).toBe('Mario\'s Magnificent Pasta');
     });
   });

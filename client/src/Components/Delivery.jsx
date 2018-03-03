@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import Moment from 'react-moment';
+import moment from 'moment';
 import classNames from 'classnames';
 
 
@@ -8,14 +10,16 @@ class Delivery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
       selectedOption: 'deliveryOption',
       showFullComponent: true,
+      distanceTime: 6,
     };
     this.updateToggleState = this.updateToggleState.bind(this);
     this.updateShowFullComponent = this.updateShowFullComponent.bind(this);
+    this.distanceTimeAlgorithm = this.distanceTimeAlgorithm.bind(this);
   }
   componentDidMount() {
+    this.distanceTimeAlgorithm();
   }
   setData(data) {
     this.setState({
@@ -31,6 +35,36 @@ class Delivery extends React.Component {
     this.setState({
       showFullComponent: !this.state.showFullComponent,
     });
+  }
+  distanceTimeAlgorithm() {
+    const lat1 = this.props.currentLocation.lat;
+    const lon1 = this.props.currentLocation.lng;
+    const lat2 = this.props.lat;
+    const lon2 = this.props.long;
+    let distance = 0;
+    function deg2rad(deg) {
+      return deg * (Math.PI / 180);
+    }
+    function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+      const R = 6371; // Radius of the earth in km
+      const dLat = deg2rad(lat2-lat1);  // deg2rad below
+      const dLon = deg2rad(lon2-lon1); 
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const d = R * c; // Distance in km
+      distance = d;
+    }
+
+    getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+    
+    const hoursTil = distance / 60;
+    this.setState({
+      distanceTime: Math.round(hoursTil),
+    });
+
   }
 
   render() {
@@ -75,7 +109,16 @@ class Delivery extends React.Component {
                 <b className='fee'>
                   {'$' + this.props.minimumFee}
                 </b>
-              </li>              
+              </li>
+              <li className='li'>
+                <div>
+                  <b>Arrives by</b>
+                </div>
+                <b className='distance'>
+                  {moment().format('HH:mm')}
+                </b>
+              </li>
+
             </ul>
           </div>
           <div className={classNames('input', { 'hidden': !this.state.showFullComponent })}>
