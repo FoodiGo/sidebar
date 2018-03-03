@@ -1,0 +1,39 @@
+.feeBar .hidden {
+  display: none;
+}
+
+.feeBar {
+  display: block;
+}
+.list .hidden {
+  display: none;
+}
+
+.list {
+  display: block;
+}
+
+
+.input .hidden {
+  display: none;
+}
+
+.input {
+  display: block;
+}
+
+.infoInput .hidden {
+  display: none;
+}
+
+.infoInput {
+  display: block;
+}
+
+.h5 .hidden {
+  display: none;
+}
+
+.h5 {
+  display: block;
+}
