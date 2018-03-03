@@ -3,8 +3,16 @@ const app = require('./server.js');
 
 describe('Test the root path', () => {
   test('It should response the GET method', () => {
-    return request(app).get("/:id/information").then(response => {
-      expect(response.statusCode).toBe(200)
+    return request(app).get("/").then(response => {
+      expect(response.statusCode).toBe(200);
+    });
+  });
+});
+
+describe('Test the root path', () => {
+  test('It should response the first data points title ', () => {
+    return request(app).get("/:101/information").then(response => {
+      expect(response.body.title).toBe('Mario\'s Magnificent Pasta');
     });
   });
 });

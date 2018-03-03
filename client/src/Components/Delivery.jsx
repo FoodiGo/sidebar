@@ -73,7 +73,7 @@ class Delivery extends React.Component {
                   <b>Delivery Min</b>
                 </div>
                 <b className='fee'>
-                  {this.props.minimumFee}
+                  {'$' + this.props.minimumFee}
                 </b>
               </li>              
             </ul>

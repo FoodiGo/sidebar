@@ -63,7 +63,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_app2.default, { location: window.navigator.geolocation }), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(_app2.default, { location: window.navigator.geolocation, id: 101 }), document.getElementById('app'));
 
 /***/ }),
 /* 1 */
@@ -22522,6 +22522,8 @@
 	
 	var _requests = __webpack_require__(/*! ./requests.js */ 186);
 	
+	var _requests2 = _interopRequireDefault(_requests);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22541,15 +22543,19 @@
 	    _this.state = {
 	      data: {}
 	    };
+	    _this.setData = _this.setData.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(App, [{
 	    key: 'componentDidMount',
-	    value: function componentDidMount() {}
+	    value: function componentDidMount() {
+	      (0, _requests2.default)(this.props.id, this.setData);
+	    }
 	  }, {
 	    key: 'setData',
 	    value: function setData(data) {
+	      console.log(data);
 	      this.setState({
 	        data: data
 	      });
@@ -22565,9 +22571,9 @@
 	          'div',
 	          { className: 'delivery' },
 	          _react2.default.createElement(_Delivery2.default, {
-	            minimumFee: this.state.data.minimumDelivery,
-	            lat: this.state.data.location.lat,
-	            long: this.state.data.location.lng
+	            minimumFee: this.state.data.minimumDelivery
+	            /*lat={this.state.data.location.lat}
+	            long={this.state.data.location.lng}*/
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -33175,7 +33181,7 @@
 	                _react2.default.createElement(
 	                  'b',
 	                  { className: 'fee' },
-	                  this.props.minimumFee
+	                  '$' + this.props.minimumFee
 	                )
 	              )
 	            )

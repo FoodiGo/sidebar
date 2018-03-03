@@ -7,8 +7,9 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use('/', router);
-app.use(express.static(path.join(__dirname, '/../client')));
+app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-app.listen(3300);
+
+app.listen(3400);
 
 module.exports = app;

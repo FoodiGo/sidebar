@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Delivery from './Components/Delivery.jsx';
 import Description from './Components/Description.jsx';
 import Hours from './Components/Hours.jsx';
-import { getInformation } from './requests.js';
+import getInformation from './requests.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,10 +12,13 @@ class App extends React.Component {
     this.state = {
       data: {},
     };
+    this.setData = this.setData.bind(this);
   }
   componentDidMount() {
+    getInformation(this.props.id, this.setData);
   }
   setData(data) {
+    console.log(data)
     this.setState({
       data: data,
     });
@@ -28,8 +31,8 @@ class App extends React.Component {
         <div className='delivery'>
           <Delivery
             minimumFee={this.state.data.minimumDelivery}
-            lat={this.state.data.location.lat}
-            long={this.state.data.location.lng}
+            /*lat={this.state.data.location.lat}
+            long={this.state.data.location.lng}*/
           />
         </div>
         <div className='hours'>
