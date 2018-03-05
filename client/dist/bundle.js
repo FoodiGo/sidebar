@@ -65,9 +65,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	_reactDom2.default.render(_react2.default.createElement(_app2.default, _defineProperty({ id: 101, location: window.navigator.geolocation }, 'id', 101)), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(_app2.default, { id: 104, location: window.navigator.geolocation }), document.getElementById('app'));
 
 /***/ }),
 /* 1 */
@@ -22597,6 +22595,7 @@
 	          'div',
 	          { className: 'delivery' },
 	          _react2.default.createElement(_Delivery2.default, {
+	            id: this.props.id,
 	            minimumFee: this.state.data.minimumDelivery,
 	            lat: this.state.data.location.lat,
 	            long: this.state.data.location.lng,
@@ -33676,6 +33675,10 @@
 	
 	var _home2 = _interopRequireDefault(_home);
 	
+	var _requests = __webpack_require__(/*! ../requests.js */ 331);
+	
+	var _requests2 = _interopRequireDefault(_requests);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33696,11 +33699,13 @@
 	      selectedOption: 'deliveryOption',
 	      showFullComponent: true,
 	      distanceTime: 6,
-	      currentTime: 12
+	      currentTime: 12,
+	      minimumFee: 5
 	    };
 	    _this.updateToggleState = _this.updateToggleState.bind(_this);
 	    _this.updateShowFullComponent = _this.updateShowFullComponent.bind(_this);
 	    _this.distanceTimeAlgorithm = _this.distanceTimeAlgorithm.bind(_this);
+	    _this.setPrice = _this.setPrice.bind(_this);
 	    return _this;
 	  }
 	
@@ -33708,14 +33713,15 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var currentMoment = (0, _moment2.default)();
+	      (0, _requests2.default)(this.props.id, this.setPrice);
 	      this.setCurrentTime(currentMoment);
 	      this.distanceTimeAlgorithm();
 	    }
 	  }, {
-	    key: 'setData',
-	    value: function setData(data) {
+	    key: 'setPrice',
+	    value: function setPrice(data) {
 	      this.setState({
-	        data: data
+	        minimumFee: data.minimumDelivery
 	      });
 	    }
 	  }, {
@@ -33877,7 +33883,7 @@
 	                  _react2.default.createElement(
 	                    'b',
 	                    { className: 'fee' },
-	                    '$ ' + this.props.minimumFee
+	                    '$ ' + this.state.minimumFee
 	                  )
 	                )
 	              ),
@@ -51093,8 +51099,8 @@
 	  }
 	
 	  _createClass(Hours, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
 	      (0, _requests2.default)(this.props.id, this.setHours);
 	      this.findPrice();
 	    }
@@ -51153,10 +51159,7 @@
 	      var currentTime = (0, _moment2.default)();
 	      var openMoment = (0, _moment2.default)(open + ':00am', 'hh:mm A');
 	      var closeMoment = (0, _moment2.default)(close + ':00pm', 'hh:mm A');
-	      console.log(currentTime);
-	      console.log(openMoment);
-	      console.log(currentTime.isAfter(openMoment));
-	      if (currentTime.isAfter(openMoment) && currentTime.isBefore(closeMoment)) {
+	      if (currentTime.isAfter(openMoment) && currentTime.isBefore(closeMoment) && open !== 0) {
 	        this.setState({
 	          status: 'open'
 	        });
@@ -51177,12 +51180,24 @@
 	      var restClosed = this.state.hours.restOfDays[close];
 	      var satOpen = this.state.hours.saturday[open];
 	      var satClosed = this.state.hours.saturday[close];
-	      this.setState({
-	        sunday: [sunOpen, sunClosed],
-	        restOfTheWeek: [restOpen, restClosed],
-	        saturday: [satOpen, satClosed]
-	      });
+	      if (sunOpen === 0 && sunClosed === 0) {
+	        this.setState({
+	          sunday: 'closed',
+	          restOfTheWeek: [restOpen, restClosed],
+	          saturday: [satOpen, satClosed]
+	        });
+	      }
+	      if (sunOpen !== 0) {
+	        this.setState({
+	          sunday: [sunOpen, sunClosed],
+	          restOfTheWeek: [restOpen, restClosed],
+	          saturday: [satOpen, satClosed]
+	        });
+	      }
 	
+	      if (this.state.currentDay === 'Sunday') {
+	        this.processOpenTimes(sunOpen, sunClosed);
+	      }
 	      if (this.state.currentDay === 'Sunday') {
 	        this.processOpenTimes(sunOpen, sunClosed);
 	      }
@@ -51216,12 +51231,25 @@
 	      var friStatus = _react2.default.createElement('td', { className: 'space' });
 	      var satStatus = _react2.default.createElement('td', { className: 'space' });
 	      var today = 'Loading Info';
-	      if (this.state.currentDay === 'Sunday') {
+	      if (this.state.currentDay === 'Sunday' && this.state.sunday !== 'closed') {
 	        today = _react2.default.createElement(
 	          'li',
 	          { className: 'todayTime' },
 	          _react2.default.createElement(_stopwatch2.default, { size: 25 }),
 	          'Today ' + this.state.sunday[0] + ':00 am - ' + this.state.sunday[1] + ':00pm ' + this.state.status
+	        );
+	        sunStatus = _react2.default.createElement(
+	          'td',
+	          { className: 'space' },
+	          this.state.status
+	        );
+	      }
+	      if (this.state.currentDay === 'Sunday' && this.state.sunday === 'closed') {
+	        today = _react2.default.createElement(
+	          'li',
+	          { className: 'todayTime' },
+	          _react2.default.createElement(_stopwatch2.default, { size: 25 }),
+	          'Today Closed'
 	        );
 	        sunStatus = _react2.default.createElement(
 	          'td',
@@ -51484,7 +51512,7 @@
 	                _react2.default.createElement(
 	                  'span',
 	                  null,
-	                  this.state.sunday[0] + ':00 am - ' + this.state.sunday[1] + ':00pm'
+	                  this.state.sunday[0] === 'c' ? 'Closed' : this.state.sunday[0] + ':00 am - ' + this.state.sunday[1] + ':00pm'
 	                )
 	              ),
 	              sunStatus
