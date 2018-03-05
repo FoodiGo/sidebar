@@ -3,33 +3,239 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Moment from 'react-moment';
 import moment from 'moment';
+import getInformation from '../requests.js';
+import TiWine from 'react-icons/lib/ti/wine';
+import TiStopWatch from 'react-icons/lib/ti/stopwatch';
 
 class Hours extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
+      sunday: 'Loading hours',
+      restOfTheWeek: 'Loading hours',
+      saturday: 'Loading hours',
+      hours: {
+        sunday: [11, 2],
+        restOfDays: [9, 10],
+        saturday: [9, 11],
+      },
+      status: 'open',
+      currentDay: 'Sunday',
+      price: '11-30',
+      priceRange: '$$',
     };
-
+    this.displayTime = this.displayTime.bind(this);
+    this.setHours = this.setHours.bind(this);
+    this.setDay = this.setDay.bind(this);
+    this.processOpenTimes = this.processOpenTimes.bind(this);
+    this.findPrice = this.findPrice.bind(this);
   }
-  componentDidMount() {
-
+  componentWillMount() {
+    getInformation(this.props.id, this.setHours);
+    this.findPrice();
   }
-  setData(data) {
+  setDay() {
+    const currentDate = moment();
+    const day = currentDate.format('dddd');
     this.setState({
-      data: data,
+      currentDay: day,
+    }, () => {
+      this.displayTime();
     });
   }
-  displayTime() {
+  setHours(data) {
+    this.setState({
+      hours: data.hours,
+      priceRange: data.price,
+    }, () => {
+      this.setDay();
+    });
+  }
+  findPrice() {
+    if (this.state.priceRange.length === 1) {
+      this.setState({
+        price: '5-20',
+      });
+    }
+    if (this.state.priceRange.length === 2) {
+      this.setState({
+        price: '11-30',
+      });
+    }
+    if (this.state.priceRange.length === 3) {
+      this.setState({
+        price: '12-50',
+      });
+    }
+    if (this.state.priceRange.length === 4) {
+      this.setState({
+        price: '15-100',
+      });
+    }
+  }
+  processOpenTimes(open, close) {
     const currentTime = moment();
+    const openMoment = moment(`${open}:00am`, 'hh:mm A');
+    const closeMoment = moment(`${close}:00pm`, 'hh:mm A');
     console.log(currentTime);
+    console.log(openMoment);
+    console.log(currentTime.isAfter(openMoment))
+    if (currentTime.isAfter(openMoment) && currentTime.isBefore(closeMoment)) {
+      this.setState({
+        status: 'open',
+      });
+    } else {
+      this.setState({
+        status: 'closed now',
+      });
+    }
+  }
+  displayTime() {
+    const open = 0;
+    const close = 1;
+    const sunOpen = this.state.hours.sunday[open];
+    const sunClosed = this.state.hours.sunday[close];
+    const restOpen = this.state.hours.restOfDays[open];
+    const restClosed = this.state.hours.restOfDays[close];
+    const satOpen = this.state.hours.saturday[open];
+    const satClosed = this.state.hours.saturday[close];
+    this.setState({
+      sunday: [sunOpen, sunClosed],
+      restOfTheWeek: [restOpen, restClosed],
+      saturday: [satOpen, satClosed],
+    });
+
+    if (this.state.currentDay === 'Sunday') {
+      this.processOpenTimes(sunOpen, sunClosed);
+    }
+    if (this.state.currentDay === 'Monday') {
+      this.processOpenTimes(restOpen, restClosed);
+    }
+    if (this.state.currentDay === 'Tuesday') {
+      this.processOpenTimes(restOpen, restClosed);
+    }
+    if (this.state.currentDay === 'Wednesday') {
+      this.processOpenTimes(restOpen, restClosed);
+    }
+    if (this.state.currentDay === 'Thursday') {
+      this.processOpenTimes(restOpen, restClosed);
+    }
+    if (this.state.currentDay === 'Friday') {
+      this.processOpenTimes(restOpen, restClosed);
+    }
+    if (this.state.currentDay === 'Saturday') {
+      this.processOpenTimes(satOpen, satClosed);
+    }
   }
 
   render() {
+    let sunStatus = <td className="space" />;
+    let monStatus = <td className="space" />;
+    let tuesStatus = <td className="space" />;
+    let wedStatus = <td className="space" />;
+    let thursStatus = <td className="space" />;
+    let friStatus = <td className="space" />;
+    let satStatus = <td className="space" />;
+    let today = 'Loading Info';
+    if (this.state.currentDay === 'Sunday') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm ${this.state.status}`}</li>;
+      sunStatus = <td className="space">{this.state.status}</td>;
+    }
+    if (this.state.currentDay === 'Monday') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      monStatus = <td className="space">{this.state.status}</td>;
+
+    }
+    if (this.state.currentDay === 'Tuesday') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      tuesStatus = <td className="space">{this.state.status}</td>;
+    }
+    if (this.state.currentDay === 'Wednesday') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      wedStatus = <td className="space">{this.state.status}</td>;
+    }
+    if (this.state.currentDay === 'Thursday') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      thursStatus = <td className="space">{this.state.status}</td>;
+    }
+    if (this.state.currentDay === 'Friday') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      friStatus = <td className="space">{this.state.status}</td>;
+    }
+    if (this.state.currentDay === 'Saturday') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.saturday[0]}:00 am - ${this.state.saturday[1]}:00pm ${this.state.status}`}</li>;
+      satStatus = <td className="space">{this.state.status}</td>;
+    }
+
     return (
-      <div className='container'>
-        <h1>Hours</h1>
-        <Moment from="2015-04-19">1976-04-19T12:59-0500</Moment>
+      <div className="containerHours">
+        <div className="todayBox">
+          <ul className="todayList">
+            {today}
+            <li>
+              <TiWine size={30} />
+              <a href="#"> Full Menu </a>
+            </li>
+            <li>
+              <div className="priceRange">{this.state.priceRange}</div>
+              <div className="price"> { `Price range $${this.state.price}` }</div>
+            </li>
+          </ul>
+        </div>
+        <h1 className="hoursTitle">Hours</h1>
+        <table className="theTable">
+          <tbody>
+            <tr>
+              <th scope="row">Mon</th>
+              <td>
+                <span>{`${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm`}</span>
+              </td>
+              {monStatus}
+            </tr>
+            <tr>
+              <th scope="row">Tue</th>
+              <td>
+                <span>{`${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm`}</span>
+              </td>
+              {tuesStatus}
+            </tr>
+            <tr>
+              <th scope="row">Wed</th>
+              <td>
+                <span>{`${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm`}</span>
+              </td>
+              {wedStatus}
+            </tr>
+            <tr>
+              <th scope="row">Thu</th>
+              <td>
+                <span>{`${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm`}</span>
+              </td>
+              {thursStatus}
+            </tr>
+            <tr>
+              <th scope="row">Fri</th>
+              <td>
+                <span>{`${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm`}</span>
+              </td>
+              {friStatus}
+            </tr>
+            <tr>
+              <th scope="row">Sat</th>
+              <td>
+                <span>{`${this.state.saturday[0]}:00 am - ${this.state.saturday[1]}:00pm`}</span>
+              </td>
+              {satStatus}
+            </tr>
+            <tr>
+              <th scope="row">Sun</th>
+              <td>
+                <span>{`${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm`}</span>
+              </td>
+              {sunStatus}
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }

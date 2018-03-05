@@ -5,7 +5,6 @@ const getInformation = (id, callback) => {
     url: `/information/:${id}`,
     type: 'GET',
   }).done((data) => {
-    console.log(data);
     callback(data);
   });
 };
