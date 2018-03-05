@@ -30,7 +30,7 @@ class Hours extends React.Component {
     this.processOpenTimes = this.processOpenTimes.bind(this);
     this.findPrice = this.findPrice.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     getInformation(this.props.id, this.setHours);
     this.findPrice();
   }
@@ -77,10 +77,7 @@ class Hours extends React.Component {
     const currentTime = moment();
     const openMoment = moment(`${open}:00am`, 'hh:mm A');
     const closeMoment = moment(`${close}:00pm`, 'hh:mm A');
-    console.log(currentTime);
-    console.log(openMoment);
-    console.log(currentTime.isAfter(openMoment))
-    if (currentTime.isAfter(openMoment) && currentTime.isBefore(closeMoment)) {
+    if (currentTime.isAfter(openMoment) && currentTime.isBefore(closeMoment) && open !== 0) {
       this.setState({
         status: 'open',
       });
@@ -99,12 +96,24 @@ class Hours extends React.Component {
     const restClosed = this.state.hours.restOfDays[close];
     const satOpen = this.state.hours.saturday[open];
     const satClosed = this.state.hours.saturday[close];
-    this.setState({
-      sunday: [sunOpen, sunClosed],
-      restOfTheWeek: [restOpen, restClosed],
-      saturday: [satOpen, satClosed],
-    });
+    if (sunOpen === 0 && sunClosed === 0) {
+      this.setState({
+        sunday: 'closed',
+        restOfTheWeek: [restOpen, restClosed],
+        saturday: [satOpen, satClosed],
+      });
+    }
+    if (sunOpen !== 0) {
+      this.setState({
+        sunday: [sunOpen, sunClosed],
+        restOfTheWeek: [restOpen, restClosed],
+        saturday: [satOpen, satClosed],
+      });
+    }
 
+    if (this.state.currentDay === 'Sunday') {
+      this.processOpenTimes(sunOpen, sunClosed);
+    }
     if (this.state.currentDay === 'Sunday') {
       this.processOpenTimes(sunOpen, sunClosed);
     }
@@ -137,8 +146,12 @@ class Hours extends React.Component {
     let friStatus = <td className="space" />;
     let satStatus = <td className="space" />;
     let today = 'Loading Info';
-    if (this.state.currentDay === 'Sunday') {
+    if (this.state.currentDay === 'Sunday' && this.state.sunday !== 'closed') {
       today = <li className="todayTime"><TiStopWatch size={25} />{`Today ${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm ${this.state.status}`}</li>;
+      sunStatus = <td className="space">{this.state.status}</td>;
+    }
+    if (this.state.currentDay === 'Sunday' && this.state.sunday === 'closed') {
+      today = <li className="todayTime"><TiStopWatch size={25} />{'Today Closed'}</li>;
       sunStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Monday') {
@@ -230,7 +243,7 @@ class Hours extends React.Component {
             <tr>
               <th scope="row">Sun</th>
               <td>
-                <span>{`${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm`}</span>
+                <span>{this.state.sunday[0] === 'c' ? 'Closed' : `${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm`}</span>
               </td>
               {sunStatus}
             </tr>

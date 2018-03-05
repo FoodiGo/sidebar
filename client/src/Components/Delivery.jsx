@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import classNames from 'classnames';
 import GoHome from 'react-icons/lib/go/home';
-
+import getInformation from '../requests.js';
 
 class Delivery extends React.Component {
   constructor(props) {
@@ -15,19 +15,22 @@ class Delivery extends React.Component {
       showFullComponent: true,
       distanceTime: 6,
       currentTime: 12,
+      minimumFee: 5,
     };
     this.updateToggleState = this.updateToggleState.bind(this);
     this.updateShowFullComponent = this.updateShowFullComponent.bind(this);
     this.distanceTimeAlgorithm = this.distanceTimeAlgorithm.bind(this);
+    this.setPrice = this.setPrice.bind(this);
   }
   componentDidMount() {
     const currentMoment = moment();
+    getInformation(this.props.id, this.setPrice);
     this.setCurrentTime(currentMoment);
     this.distanceTimeAlgorithm();
   }
-  setData(data) {
+  setPrice(data) {
     this.setState({
-      data: data,
+      minimumFee: data.minimumDelivery,
     });
   }
   setCurrentTime(thisMoment) {
@@ -105,7 +108,7 @@ class Delivery extends React.Component {
           <div className={classNames('feeBar', { "hidden": !this.state.showFullComponent })}>
             <ul className={classNames('list', { "hidden": !this.state.showFullComponent })}>
               <li className="li">
-                <div className='blockList'>
+                <div className="blockList">
                   <div>
                     <b>Fee</b>
                   </div>
@@ -113,17 +116,17 @@ class Delivery extends React.Component {
                 </div>
               </li>
               <li className="li">
-                <div className='blockList'>
+                <div className="blockList">
                   <div>
                     <b>Delivery Min</b>
                   </div>
                   <b className="fee">
-                    {`$ ${this.props.minimumFee}`}
+                    {`$ ${this.state.minimumFee}`}
                   </b>
                 </div>
               </li>
               <li className="li">
-                <div className='blockList'>
+                <div className="blockList">
                   <div>
                     <b>Arrives by</b>
                   </div>

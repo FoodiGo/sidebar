@@ -47,6 +47,7 @@ class App extends React.Component {
       <div className="container">
         <div className="delivery">
           <Delivery
+            id={this.props.id}
             minimumFee={this.state.data.minimumDelivery}
             lat={this.state.data.location.lat}
             long={this.state.data.location.lng}
@@ -58,7 +59,7 @@ class App extends React.Component {
         </div>
         <div className="hours">
           <Description description={this.state.data.text} />
-        </div>  
+        </div>
       </div>
     );
   }
