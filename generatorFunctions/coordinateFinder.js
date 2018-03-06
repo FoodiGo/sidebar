@@ -8,6 +8,7 @@ module.exports = (state, callback) => {
       callback(latLong);
     })
     .catch((error) => {
+      callback('error');
       throw error;
     });
 };

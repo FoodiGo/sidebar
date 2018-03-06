@@ -62,7 +62,7 @@ const searchCoordinates = (restaurantsArray, addressesArray, fn) => {
     const restaurant = item;
     let incrementAddress = increment;
     coordGen(addressesArray[incrementAddress], (latLong) => {
-      if (latLong === undefined) {
+      if (latLong === 'error') {
         restaurant.location = { lng: -93.6739507, lat: 39.7701723 };
       }
       restaurant.location = latLong;
