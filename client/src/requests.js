@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 const getInformation = (id, callback) => {
   $.ajax({
-    url: `/information/:${id}`,
+    url: `/information/${id}`,
     type: 'GET',
   }).done((data) => {
     console.log(data)
