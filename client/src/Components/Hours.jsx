@@ -33,7 +33,6 @@ class Hours extends React.Component {
   }
   componentDidMount() {
     getInformation(this.props.id, this.setHours);
-    
   }
   setDay() {
     const currentDate = moment();
