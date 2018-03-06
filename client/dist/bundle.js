@@ -65,7 +65,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_app2.default, { id: 104, location: window.navigator.geolocation }), document.getElementById('app'));
+	window.Sidebar = _app2.default;
 
 /***/ }),
 /* 1 */
@@ -22536,13 +22536,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+	var Sidebar = function (_React$Component) {
+	  _inherits(Sidebar, _React$Component);
 	
-	  function App(props) {
-	    _classCallCheck(this, App);
+	  function Sidebar(props) {
+	    _classCallCheck(this, Sidebar);
 	
-	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
 	
 	    _this.state = {
 	      data: {
@@ -22561,7 +22561,7 @@
 	    return _this;
 	  }
 	
-	  _createClass(App, [{
+	  _createClass(Sidebar, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      (0, _requests2.default)(this.props.id, this.setData);
@@ -22616,10 +22616,10 @@
 	    }
 	  }]);
 	
-	  return App;
+	  return Sidebar;
 	}(_react2.default.Component);
 	
-	exports.default = App;
+	exports.default = Sidebar;
 
 /***/ }),
 /* 185 */
@@ -33706,16 +33706,15 @@
 	    _this.updateShowFullComponent = _this.updateShowFullComponent.bind(_this);
 	    _this.distanceTimeAlgorithm = _this.distanceTimeAlgorithm.bind(_this);
 	    _this.setPrice = _this.setPrice.bind(_this);
+	    _this.setCurrentTime = _this.setCurrentTime.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(Delivery, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var currentMoment = (0, _moment2.default)();
 	      (0, _requests2.default)(this.props.id, this.setPrice);
-	      this.setCurrentTime(currentMoment);
-	      this.distanceTimeAlgorithm();
+	      this.distanceTimeAlgorithm(this.setCurrentTime);
 	    }
 	  }, {
 	    key: 'setPrice',
@@ -33752,7 +33751,7 @@
 	    }
 	  }, {
 	    key: 'distanceTimeAlgorithm',
-	    value: function distanceTimeAlgorithm() {
+	    value: function distanceTimeAlgorithm(callback) {
 	      var lat1 = this.props.currentLocation.lat;
 	      var lon1 = this.props.currentLocation.lng;
 	      var lat2 = this.props.lat;
@@ -33761,6 +33760,7 @@
 	      function deg2rad(deg) {
 	        return deg * (Math.PI / 180);
 	      }
+	      // Haversine formula
 	      function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 	        var R = 6371; // Radius of the earth in km
 	        var dLat = deg2rad(lat2 - lat1); // deg2rad below
@@ -33774,6 +33774,9 @@
 	      var hoursTil = distance / 60;
 	      this.setState({
 	        distanceTime: Math.round(hoursTil)
+	      }, function () {
+	        var currentMoment = (0, _moment2.default)();
+	        callback(currentMoment);
 	      });
 	    }
 	  }, {
@@ -51106,7 +51109,6 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      (0, _requests2.default)(this.props.id, this.setHours);
-	      this.findPrice();
 	    }
 	  }, {
 	    key: 'setDay',
@@ -51131,6 +51133,7 @@
 	        priceRange: data.price
 	      }, function () {
 	        _this3.setDay();
+	        _this3.findPrice();
 	      });
 	    }
 	  }, {

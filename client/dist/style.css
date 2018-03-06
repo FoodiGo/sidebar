@@ -3,6 +3,8 @@
 }
 .container {
   padding-left: 200px;
+  vertical-align: center;
+  position: relative;
   margin-left: 500px;
 
 }

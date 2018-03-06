@@ -7,7 +7,7 @@ import Description from './Components/Description.jsx';
 import Hours from './Components/Hours.jsx';
 import getInformation from './requests.js';
 
-class App extends React.Component {
+class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,4 +65,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Sidebar;

@@ -33,7 +33,7 @@ class Hours extends React.Component {
   }
   componentDidMount() {
     getInformation(this.props.id, this.setHours);
-    this.findPrice();
+    
   }
   setDay() {
     const currentDate = moment();
@@ -50,6 +50,7 @@ class Hours extends React.Component {
       priceRange: data.price,
     }, () => {
       this.setDay();
+      this.findPrice();
     });
   }
   findPrice() {
@@ -148,35 +149,35 @@ class Hours extends React.Component {
     let satStatus = <td className="space" />;
     let today = 'Loading Info';
     if (this.state.currentDay === 'Sunday' && this.state.sunday !== 'closed') {
-      today = <li className="todayTime"><TiStopWatch color={'red'} size={25} />{`Today ${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm ${this.state.status}`}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm ${this.state.status}`}</li>;
       sunStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Sunday' && this.state.sunday === 'closed') {
-      today = <li className="todayTime"><TiStopWatch color={'red'}  size={25} />{'Today Closed'}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{'Today Closed'}</li>;
       sunStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Monday') {
-      today = <li className="todayTime"><TiStopWatch color={'red'}  size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
       monStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Tuesday') {
-      today = <li className="todayTime"><TiStopWatch color={'red'}  size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
       tuesStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Wednesday') {
-      today = <li className="todayTime"><TiStopWatch color={'red'}  size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
       wedStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Thursday') {
-      today = <li className="todayTime"><TiStopWatch color={'red'}  size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
       thursStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Friday') {
-      today = <li className="todayTime"><TiStopWatch color={'red'}  size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
       friStatus = <td className="space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Saturday') {
-      today = <li className="todayTime"><TiStopWatch color={'red'} size={25} />{`Today ${this.state.saturday[0]}:00 am - ${this.state.saturday[1]}:00pm ${this.state.status}`}</li>;
+      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.saturday[0]}:00 am - ${this.state.saturday[1]}:00pm ${this.state.status}`}</li>;
       satStatus = <td className="space">{this.state.status}</td>;
     }
 
