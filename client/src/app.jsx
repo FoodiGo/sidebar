@@ -11,7 +11,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {
+      restaurant: {
         location: { lat: 29, lng: 30 },
         hours: {
           sunday: [11, 2],
@@ -23,21 +23,15 @@ class Sidebar extends React.Component {
       location: { lat: 29.6648274, lng: -79.5157535 },
     };
     this.setData = this.setData.bind(this);
-    this.setCurrentLocation = this.setCurrentLocation.bind(this);
   }
   componentDidMount() {
     getInformation(this.props.id, this.setData);
-    this.setCurrentLocation();
   }
   setData(data) {
-    this.setState({
-      data: data,
-    });
-  }
-  setCurrentLocation() {
     this.props.location.getCurrentPosition((position) => {
       this.setState({
         location: { lat: position.coords.latitude, lng: position.coords.longitude },
+        restaurant: data,
       });
     });
   }
@@ -48,17 +42,17 @@ class Sidebar extends React.Component {
         <div className="delivery">
           <Delivery
             id={this.props.id}
-            minimumFee={this.state.data.minimumDelivery}
-            lat={this.state.data.location.lat}
-            long={this.state.data.location.lng}
+            minimumFee={this.state.restaurant.minimumDelivery}
+            lat={this.state.restaurant.location.lat}
+            long={this.state.restaurant.location.lng}
             currentLocation={this.state.location}
           />
         </div>
         <div className="hours">
-          <Hours id={this.props.id} price={this.state.data.price} />
+          <Hours id={this.props.id} price={this.state.restaurant.price} />
         </div>
         <div className="hours">
-          <Description description={this.state.data.text} />
+          <Description description={this.state.restaurant.text} />
         </div>
       </div>
     );
