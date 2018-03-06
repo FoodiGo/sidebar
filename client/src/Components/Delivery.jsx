@@ -21,12 +21,11 @@ class Delivery extends React.Component {
     this.updateShowFullComponent = this.updateShowFullComponent.bind(this);
     this.distanceTimeAlgorithm = this.distanceTimeAlgorithm.bind(this);
     this.setPrice = this.setPrice.bind(this);
+    this.setCurrentTime = this.setCurrentTime.bind(this);
   }
   componentDidMount() {
-    const currentMoment = moment();
     getInformation(this.props.id, this.setPrice);
-    this.setCurrentTime(currentMoment);
-    this.distanceTimeAlgorithm();
+    this.distanceTimeAlgorithm(this.setCurrentTime);
   }
   setPrice(data) {
     this.setState({
@@ -49,7 +48,7 @@ class Delivery extends React.Component {
       showFullComponent: !this.state.showFullComponent,
     });
   }
-  distanceTimeAlgorithm() {
+  distanceTimeAlgorithm(callback) {
     const lat1 = this.props.currentLocation.lat;
     const lon1 = this.props.currentLocation.lng;
     const lat2 = this.props.lat;
@@ -58,10 +57,11 @@ class Delivery extends React.Component {
     function deg2rad(deg) {
       return deg * (Math.PI / 180);
     }
+    // Haversine formula
     function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
       const R = 6371; // Radius of the earth in km
-      const dLat = deg2rad(lat2 - lat1);  // deg2rad below
-      const dLon = deg2rad(lon2 - lon1); 
+      const dLat = deg2rad(lat2 - lat1); // deg2rad below
+      const dLon = deg2rad(lon2 - lon1);
       const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
@@ -70,10 +70,13 @@ class Delivery extends React.Component {
       const d = R * c; // Distance in km
       distance = d;
     }
-    getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);  
+    getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
     const hoursTil = distance / 60;
     this.setState({
       distanceTime: Math.round(hoursTil),
+    }, () => {
+      const currentMoment = moment();
+      callback(currentMoment);
     });
   }
   render() {
