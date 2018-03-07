@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 const Description = (props =>
-  <div className="containerDescription">
-    <h1>From The Business</h1>
-    <p>{props.description}</p>
+  <div>
+    <div className="h1Description">
+      <h1>From The Business</h1>
+    </div>
+    <div className="containerDescription">
+      <p>{props.description}</p>
+    </div>
   </div>
 );
 
