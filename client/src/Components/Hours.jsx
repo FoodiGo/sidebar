@@ -139,64 +139,64 @@ class Hours extends React.Component {
   }
 
   render() {
-    let sunStatus = <td className="space" />;
-    let monStatus = <td className="space" />;
-    let tuesStatus = <td className="space" />;
-    let wedStatus = <td className="space" />;
-    let thursStatus = <td className="space" />;
-    let friStatus = <td className="space" />;
-    let satStatus = <td className="space" />;
+    let sunStatus = <td className="kev_space" />;
+    let monStatus = <td className="kev_space" />;
+    let tuesStatus = <td className="kev_space" />;
+    let wedStatus = <td className="kev_space" />;
+    let thursStatus = <td className="kev_space" />;
+    let friStatus = <td className="kev_space" />;
+    let satStatus = <td className="kev_space" />;
     let today = 'Loading Info';
     if (this.state.currentDay === 'Sunday' && this.state.sunday !== 'closed') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm ${this.state.status}`}</li>;
-      sunStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.sunday[0]}:00 am - ${this.state.sunday[1]}:00pm ${this.state.status}`}</li>;
+      sunStatus = <td className="kev_space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Sunday' && this.state.sunday === 'closed') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{'Today Closed'}</li>;
-      sunStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{'Today Closed'}</li>;
+      sunStatus = <td className="kev_space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Monday') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
-      monStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      monStatus = <td className="kev_space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Tuesday') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
-      tuesStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      tuesStatus = <td className="kev_space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Wednesday') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
-      wedStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      wedStatus = <td className="kev_space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Thursday') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
-      thursStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      thursStatus = <td className="kev_space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Friday') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
-      friStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.restOfTheWeek[0]}:00 am - ${this.state.restOfTheWeek[1]}:00pm ${this.state.status}`}</li>;
+      friStatus = <td className="kev_space">{this.state.status}</td>;
     }
     if (this.state.currentDay === 'Saturday') {
-      today = <li className="todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.saturday[0]}:00 am - ${this.state.saturday[1]}:00pm ${this.state.status}`}</li>;
-      satStatus = <td className="space">{this.state.status}</td>;
+      today = <li className="kev_todayTime"><TiStopWatch color="red" size={25} />{`Today ${this.state.saturday[0]}:00 am - ${this.state.saturday[1]}:00pm ${this.state.status}`}</li>;
+      satStatus = <td className="kev_space">{this.state.status}</td>;
     }
 
     return (
-      <div className="containerHours">
-        <div className="todayBox">
-          <ul className="todayList">
+      <div className="kev_containerHours">
+        <div className="kev_todayBox">
+          <ul className="kev_todayList">
             {today}
             <li>
               <TiWine size={30} />
               <a href="#"> Full Menu </a>
             </li>
             <li>
-              <div className="priceRange">{this.state.priceRange}</div>
-              <div className="price"> { `Price range $${this.state.price}` }</div>
+              <div className="kev_priceRange">{this.state.priceRange}</div>
+              <div className="kev_price"> { `Price range $${this.state.price}` }</div>
             </li>
           </ul>
         </div>
-        <h1 className="hoursTitle">Hours</h1>
-        <table className="theTable">
+        <h1 className="kev_hoursTitle">Hours</h1>
+        <table className="kev_theTable">
           <tbody>
             <tr>
               <th scope="row">Mon</th>
