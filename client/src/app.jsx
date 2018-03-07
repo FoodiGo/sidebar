@@ -38,8 +38,8 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="delivery">
+      <div className="kev_container">
+        <div className="kev_delivery">
           <Delivery
             id={this.props.id}
             minimumFee={this.state.restaurant.minimumDelivery}
@@ -48,10 +48,10 @@ class Sidebar extends React.Component {
             currentLocation={this.state.location}
           />
         </div>
-        <div className="hours">
+        <div className="kev_hours">
           <Hours id={this.props.id} price={this.state.restaurant.price} />
         </div>
-        <div className="hours">
+        <div className="kev_description">
           <Description description={this.state.restaurant.text} />
         </div>
       </div>

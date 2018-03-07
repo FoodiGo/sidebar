@@ -81,15 +81,15 @@ class Delivery extends React.Component {
   }
   render() {
     return (
-      <div className="container">
-        <div className="title">
+      <div className="kev_container">
+        <div className="kev_title">
           <h1><GoHome size={30} />Order Delivery or Takeout</h1>
         </div>
-        <form className="form">
-          <div className="optionSelect">
-            <label className="radio-check">
+        <form className="kev_form">
+          <div className="kev_optionSelect">
+            <label className="kev_radio-check">
               <input
-                className="radios"
+                className="kev_radios"
                 type="radio"
                 value="deliveryOption"
                 checked={this.state.selectedOption === 'deliveryOption'}
@@ -97,9 +97,9 @@ class Delivery extends React.Component {
               />
               <span>Delivery</span>
             </label>
-            <label className="radio-check">
+            <label className="kev_radio-check">
               <input
-                className="radios"
+                className="kev_radios"
                 type="radio"
                 value="takeoutOption"
                 checked={this.state.selectedOption === 'takeoutOption'}
@@ -108,32 +108,32 @@ class Delivery extends React.Component {
               <span>Takeout</span>
             </label>
           </div>
-          <div className={classNames('feeBar', { "hidden": !this.state.showFullComponent })}>
-            <ul className={classNames('list', { "hidden": !this.state.showFullComponent })}>
-              <li className="li">
-                <div className="blockList">
+          <div className={classNames('kev_feeBar', { "hidden": !this.state.showFullComponent })}>
+            <ul className={classNames('kev_list', { "hidden": !this.state.showFullComponent })}>
+              <li className="kev_li">
+                <div className="kev_blockList">
                   <div>
                     <b>Fee</b>
                   </div>
-                  <b className="fee">$2.99</b>
+                  <b className="kev_fee">$2.99</b>
                 </div>
               </li>
-              <li className="li">
-                <div className="blockList">
+              <li className="kev_li">
+                <div className="kev_blockList">
                   <div>
                     <b>Delivery Min</b>
                   </div>
-                  <b className="fee">
+                  <b className="kev_fee">
                     {`$ ${this.state.minimumFee}`}
                   </b>
                 </div>
               </li>
-              <li className="li">
-                <div className="blockList">
+              <li className="kev_li">
+                <div className="kev_blockList">
                   <div>
                     <b>Arrives by</b>
                   </div>
-                  <b className="distance">
+                  <b className="kev_distance">
                     {this.state.currentTime}
                   </b>
                 </div>
@@ -141,11 +141,11 @@ class Delivery extends React.Component {
 
             </ul>
           </div>
-          <div className={classNames('input', { "hidden": !this.state.showFullComponent })}>
-            <h5 className={classNames('h5', { "hidden": !this.state.showFullComponent })}>Delivery Address</h5>
-            <input placeholder="1 Yelp St., San Fransisco, CA 94105" cols="30" className={classNames('infoInput', { "hidden": !this.state.showFullComponent })} />
+          <div className={classNames('kev_input', { "hidden": !this.state.showFullComponent })}>
+            <h5 className={classNames('kev_h5', { "hidden": !this.state.showFullComponent })}>Delivery Address</h5>
+            <input placeholder="1 Yelp St., San Fransisco, CA 94105" cols="30" className={classNames('kev_infoInput', { "hidden": !this.state.showFullComponent })} />
           </div>
-          <button className="btn">View Menu</button>
+          <button className="kev_btn">View Menu</button>
         </form>
       </div>
     );
