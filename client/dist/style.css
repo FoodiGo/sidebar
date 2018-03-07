@@ -12,8 +12,7 @@
   position: relative;
   text-align: center;
   display: inline-block;
-  width: 40%;
-  height: 40%;
+  width: 100%;
   border: 0.5px solid grey;
   border-radius: 15px;
 }
@@ -101,14 +100,13 @@ h1 {
   display: inline-block;
   text-align: center;
   padding-bottom: 5px;
-  size: 30px;
+  width: 100%;
 }
 .price {
   padding-left: -20px;
 }
 
 .infoInput .hidden {
-  padding-right: 50px;
   display: none;
 }
 .optionSelect input.radios {
@@ -120,7 +118,7 @@ h1 {
 }
 .infoInput {
   display: block;
-  width: 350px;
+  width: 100%;
   padding: 0 20px;
 }
 
@@ -151,7 +149,7 @@ input::-webkit-input-placeholder {
   display: flex;
   justify-content: center;
   display: inline-block;
-  width: 40%;
+  width: 100%;
 }
 .todayList {
   display: block;
