@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node server/server.js",
-    "dev-react": "webpack -d --watch",
-    "prod-react": "webpack -p --watch",
+    "dev-react": "webpack",
     "build-data": "node generatorFunctions/seed.js"
   },
   "author": "",
