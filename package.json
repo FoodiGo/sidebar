@@ -4,10 +4,10 @@
   "description": "Yelp Application",
   "main": "seed.js",
   "scripts": {
-    "mongod": "mongod",
     "test": "jest",
     "start": "node server/server.js",
     "dev-react": "webpack -d --watch",
+    "prod-react": "webpack -p --watch",
     "build-data": "node generatorFunctions/seed.js"
   },
   "author": "",
