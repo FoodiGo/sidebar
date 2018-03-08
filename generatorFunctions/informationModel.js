@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost/sidebar');
+const url = process.env.MONGO;
+mongoose.connect(url);
 
 const informationSchema = mongoose.Schema({
   id: {
