@@ -13,7 +13,10 @@
   text-align: center;
   display: inline-block;
   width: 100%;
-  border: 0.5px solid grey;
+  border: solid;
+  border-width: 2px;
+  border-color: #eee;
+  border-top-color: #eee;
   border-radius: 15px;
 }
 .kev_container .kev_title{
@@ -35,7 +38,10 @@
   display: block;
   border-radius: 15px;
   padding: 5px;
-  border: 0.5px solid grey;
+  border: solid;
+  border-width: 2px;
+  border-color: #eee;
+  border-top-color: #eee;
 }
 .kev_containerDescription h1 {
   font-size: 30px;
@@ -154,8 +160,13 @@ input::-webkit-input-placeholder {
 }
 .kev_todayList {
   display: block;
-  border: 0.5px solid grey;
+  border: solid;
+  border-width: 2px;
+  border-color: #eee;
+  border-top-color: #eee;
   border-radius: 15px;
+  align-content: center;
+  padding-left: 50px;
 
 }
 .kev_containerDescription {
@@ -203,10 +214,12 @@ ul{
   vertical-align: center;
   font-family: Arial;
   color: #ffffff;
-  padding-bottom: 20px;
   font-size: 20px;
-  padding: 10px 100px 12px 100px;
+  padding: 10px 100px 10px 100px;
   text-decoration: none;
+}
+.buttonWrap {
+  padding-bottom: 20px;
 }
 
 .kev_btn:hover {

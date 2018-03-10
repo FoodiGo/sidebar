@@ -145,7 +145,9 @@ class Delivery extends React.Component {
             <h5 className={classNames('kev_h5', { "hidden": !this.state.showFullComponent })}>Delivery Address</h5>
             <input placeholder="1 Yelp St., San Fransisco, CA 94105" cols="30" className={classNames('kev_infoInput', { "hidden": !this.state.showFullComponent })} />
           </div>
-          <button className="kev_btn">View Menu</button>
+          <div className="buttonWrap">
+            <button className="kev_btn">View Menu</button>
+          </div>
         </form>
       </div>
     );
